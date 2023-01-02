@@ -47,4 +47,4 @@ def get_soup(resp_text):
 
 
 if __name__ == "__main__":
-    asyncio.run(request_flibusta())
+    asyncio.get_event_loop().run_until_complete(request_flibusta())
