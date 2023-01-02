@@ -34,10 +34,12 @@ async def scrape_page(page, session):
 def download_file(url, session, bookname):
     with session.get(url, allow_redirects=True, stream=True) as r:
         print(bookname)
-        r.raise_for_status()
-        with open(f"{bookname}.fb2", 'wb') as f:
-            for chunk in r.iter_content(chunk_size=8192):
-                f.write(chunk)
+        if r.status_code != 500:
+            with open(f"flibusta/{bookname}.fb2", 'wb') as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
+        else:
+            pass
 
 
 def get_soup(resp_text):
