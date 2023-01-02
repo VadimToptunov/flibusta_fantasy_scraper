@@ -35,7 +35,7 @@ def download_file(url, session, bookname):
     with session.get(url, allow_redirects=True, stream=True) as r:
         print(bookname)
         if r.status_code != 500:
-            with open(f"flibusta/{bookname}.fb2", 'wb') as f:
+            with open(f"flibusta/{bookname.replace('/', '-')}.fb2", 'wb') as f:
                 for chunk in r.iter_content(chunk_size=8192):
                     f.write(chunk)
         else:
